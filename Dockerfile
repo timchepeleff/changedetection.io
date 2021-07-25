@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxslt-dev \
     zlib1g-dev \
     g++
-    
+
 RUN mkdir /install
 WORKDIR /install
 
@@ -45,6 +45,9 @@ RUN [ ! -d "/datastore" ] && mkdir /datastore
 # Copy modules over to the final image and add their dir to PYTHONPATH
 COPY --from=builder /dependencies /usr/local
 ENV PYTHONPATH=/usr/local
+
+EXPOSE 8080
+EXPOSE 5000
 
 # The actual flask app
 COPY backend /app/backend
